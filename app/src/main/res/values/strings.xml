@@ -6,4 +6,5 @@
     <string name="headerbackground">header background</string>
     <string name="tag_line">красота и совершенство в твоих руках</string>
     <string name="hint_progress_bar">осталось 20 дней</string>
+    <string name="day">День:</string>
 </resources>
