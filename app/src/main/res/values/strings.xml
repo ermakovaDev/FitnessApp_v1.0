@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">FitnessApp</string>
     <string name="todo">TODO</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="headerbackground">header background</string>
+    <string name="tag_line">красота и совершенство в твоих руках</string>
+    <string name="hint_progress_bar">осталось 20 дней</string>
 </resources>
