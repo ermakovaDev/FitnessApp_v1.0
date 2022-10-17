@@ -16,14 +16,14 @@ import com.example.fitnessapp.databinding.FragmentExercisesListBinding
 
 class ExercisesListFragment : Fragment() {
 
-    private lateinit var binding:FragmentExercisesListBinding
+    private lateinit var binding: FragmentExercisesListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentExercisesListBinding.inflate(inflater,container, false)
+        binding = FragmentExercisesListBinding.inflate(inflater, container, false)
         return binding.root
     }
 

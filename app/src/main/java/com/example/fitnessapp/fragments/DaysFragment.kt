@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitnessapp.R
 import com.example.fitnessapp.adapters.DayModel
@@ -14,11 +15,13 @@ import com.example.fitnessapp.adapters.DaysAdapter
 import com.example.fitnessapp.adapters.ExerciseModel
 import com.example.fitnessapp.databinding.FragmentDaysBinding
 import com.example.fitnessapp.utilites.FragmentManager
+import com.example.fitnessapp.utilites.MainViewModel
 
 
 class DaysFragment : Fragment(), DaysAdapter.Listener {
 
     private lateinit var binding: FragmentDaysBinding
+    private val model: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +44,18 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
         adapter.submitList(fillDaysArray())
     }
 
+    private fun fillExerciseList(day: DayModel) {
+        val tempList = ArrayList<ExerciseModel>()
+        day.exercises.split("_").forEach {
+            val exerciseList = resources.getStringArray(R.array.exercise)
+            val exercise = exerciseList[it.toInt()]
+            val exerciseArray = exercise.split("|")
+            tempList.add(ExerciseModel(exerciseArray[0], exerciseArray[1], exerciseArray[2]))
+        }
+        model.mutableListExercise.value = tempList
+    }
+
+
     private fun fillDaysArray(): ArrayList<DayModel> {
         val tempArray = ArrayList<DayModel>() // initialisation instance of class
         resources.getStringArray(R.array.day_position).forEach {
@@ -49,12 +64,8 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
         return tempArray
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = DaysFragment() //~ singleton
-    }
-
     override fun onClick(day: DayModel) {
+        fillExerciseList(day)
         FragmentManager.setFragment(
             ExercisesListFragment.newInstance(),
             activity as AppCompatActivity
@@ -62,15 +73,9 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
     }
 
 
-    private fun fillExerciseList(day: DayModel){
-        val tempList = ArrayList<ExerciseModel>()
-        day.exercises.split("_").forEach{
-            val exerciseList = resources.getStringArray(R.array.exercise)
-            val exercise  = exerciseList[it.toInt()]
-            val exerciseArray = exercise.split("|")
-            tempList.add(ExerciseModel(exerciseArray[0],exerciseArray[1],exerciseArray[2]))
-        }
-
+    companion object {
+        @JvmStatic
+        fun newInstance() = DaysFragment() //~ singleton
     }
 
 }
