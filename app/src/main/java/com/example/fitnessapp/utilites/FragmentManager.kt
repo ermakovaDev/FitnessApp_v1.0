@@ -6,10 +6,14 @@ import com.example.fitnessapp.R
 
 object FragmentManager {
 
-    fun setFragment(newFragment: Fragment, activity: AppCompatActivity){
+    var currentFragment: Fragment? = null
+
+    fun setFragment(newFragment: Fragment, activity: AppCompatActivity) {
         val transaction = activity.supportFragmentManager.beginTransaction()
         transaction.replace(R.id.clPlaceHolder, newFragment)
         transaction.commit()
+
+        currentFragment = newFragment
     }
 
 }

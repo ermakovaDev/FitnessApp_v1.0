@@ -15,6 +15,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        FragmentManager.setFragment(DaysFragment.newInstance(),this)
+        FragmentManager.setFragment(DaysFragment.newInstance(), this)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        if (FragmentManager.currentFragment is DaysFragment) {
+            super.onBackPressed()
+        } else {
+            FragmentManager.setFragment(DaysFragment.newInstance(), this)
+        }
     }
 }

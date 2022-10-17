@@ -9,16 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fitnessapp.R
 import com.example.fitnessapp.databinding.DaysListItemBinding
 
-class DaysAdapter : ListAdapter<DayModel, DaysAdapter.DayHolder>(MyComparator()) { // класс модели + класс разметки
+class DaysAdapter(val listener: Listener) : ListAdapter<DayModel, DaysAdapter.DayHolder>(MyComparator()) { // класс модели + класс разметки
 
     class DayHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = DaysListItemBinding.bind(view)
 
-        fun setData(day: DayModel) = with(binding) { // | binding.apply{}
+        fun setData(day: DayModel, listener: Listener) = with(binding) { // | binding.apply{}
             val dayStr = root.context.getString(R.string.day) + " ${adapterPosition + 1}"
             tvDays.text = dayStr
             val exerciseCounterStr = root.context.getString(R.string.exercise) + " " + day.exercises.split("_").size.toString()
             tvCounter.text = exerciseCounterStr
+            itemView.setOnClickListener {
+                listener.onClick(day)
+            }
         }
 
     }
@@ -29,7 +32,7 @@ class DaysAdapter : ListAdapter<DayModel, DaysAdapter.DayHolder>(MyComparator())
     }
 
     override fun onBindViewHolder(holder: DayHolder, position: Int) {
-        holder.setData(getItem(position))
+        holder.setData(getItem(position), listener)
     }
 
     class MyComparator : DiffUtil.ItemCallback<DayModel>(){
@@ -41,6 +44,10 @@ class DaysAdapter : ListAdapter<DayModel, DaysAdapter.DayHolder>(MyComparator())
             return oldItem == newItem
         }
 
+    }
+
+    interface Listener{
+        fun onClick(day: DayModel)
     }
 
 }
