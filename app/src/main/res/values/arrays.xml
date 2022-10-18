@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="exercise">
-        <item>Warm up legs 0|x10|legs_warm_up_low.gif</item> <!-- 0 -->
+        <item>Warm up legs 0|10|legs_warm_up_low.gif</item> <!-- 0 -->
         <item>Warm up legs 1|x10|legs_warm_up_low.gif</item> <!-- 1 -->
-        <item>Warm up legs 2|x10|legs_warm_up_low.gif</item> <!-- 2 -->
+        <item>Warm up legs 2|10|legs_warm_up_low.gif</item> <!-- 2 -->
         <item>Warm up legs 3|x10|legs_warm_up_low.gif</item> <!-- 3 -->
-        <item>Warm up legs 4|x10|legs_warm_up_low.gif</item> <!-- 4 -->
+        <item>Warm up legs 4|10|legs_warm_up_low.gif</item> <!-- 4 -->
     </string-array>
 
     <string-array name="day_position">
