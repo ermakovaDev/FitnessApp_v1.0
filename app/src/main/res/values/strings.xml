@@ -8,4 +8,5 @@
     <string name="hint_progress_bar">осталось 20 дней</string>
     <string name="day">День:</string>
     <string name="exercise">Кол-во упражнений:</string>
+    <string name="waiting_message">Упражнения начнутся через:</string>
 </resources>
