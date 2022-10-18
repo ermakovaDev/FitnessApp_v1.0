@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitnessapp.R
@@ -35,16 +36,23 @@ class ExercisesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRCView()
-        model.mutableListExercise.observe(viewLifecycleOwner){
-        adapter.submitList(it)
+        model.mutableListExercise.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
 
         }
     }
 
-    private fun initRCView() = with(binding){
+    private fun initRCView() = with(binding) {
         adapter = ExerciseAdapter()
         rcView.layoutManager = LinearLayoutManager(activity)
         rcView.adapter = adapter
+
+        btnExerciseStart.setOnClickListener {
+            com.example.fitnessapp.utilites.FragmentManager.setFragment(
+                WaitingFragment.newInstance(),
+                activity as AppCompatActivity
+            )
+        }
     }
 
     companion object {

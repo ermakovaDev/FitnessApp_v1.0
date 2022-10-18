@@ -9,4 +9,5 @@
     <string name="day">День:</string>
     <string name="exercise">Кол-во упражнений:</string>
     <string name="waiting_message">Упражнения начнутся через:</string>
+    <string name="timer_start">НАЧАТЬ</string>
 </resources>
