@@ -9,3 +9,5 @@
 [GITHUB LIBRARY](https://github.com/koral--/android-gif-drawable)
 4. Splash Screen in Android
 [PROANDROIDDEV.COM](https://proandroiddev.com/splash-screen-in-android-3bd9552b92a5)
+*Автор не показал, что нужно отменять таймер, если пользователь нажмет Back во время показа сплэша, 
+а также, что нехорошо, если этот экран остается в истории и можно им управлять с помощью флагов в манифесте для такого.*

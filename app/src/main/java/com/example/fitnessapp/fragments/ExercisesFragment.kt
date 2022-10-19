@@ -8,11 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import com.example.fitnessapp.R
 import com.example.fitnessapp.adapters.ExerciseModel
 import com.example.fitnessapp.databinding.FragmentExerciseBinding
-import com.example.fitnessapp.utilites.FragmentManager
 import com.example.fitnessapp.utilites.MainViewModel
 import com.example.fitnessapp.utilites.TimeUtils
 import pl.droidsonroids.gif.GifDrawable
@@ -52,6 +51,7 @@ class ExercisesFragment : Fragment() {
             val exercis = exercList?.get(exercisesCounter++) ?: return
             showExercise(exercis)
             setExerciseType(exercis)
+            showNextExercise()
         } else {
             Toast.makeText(activity, "DONE", Toast.LENGTH_LONG).show()
         }
@@ -69,6 +69,27 @@ class ExercisesFragment : Fragment() {
         } else {
             startTimer(exercise)
         }
+    }
+
+    private fun showNextExercise() = with(binding) {
+        if (exercisesCounter < exercList?.size!!) {
+            val exercis = exercList?.get(exercisesCounter) ?: return
+            ivExercFooterImage.setImageDrawable(GifDrawable(root.context.assets,exercis.image))
+            setTimeType(exercis)
+        } else {
+            ivExercFooterImage.setImageDrawable(GifDrawable(root.context.assets,"finish.gif"))
+            tvExercFooterNextTitle.text = getString(R.string.finish)
+        }
+    }
+
+    private fun setTimeType(exercise: ExerciseModel) = with(binding){
+        if (exercise.time.startsWith("x")) {
+            tvExercFooterNextTitle.text = exercise.time
+        } else {
+            val title = exercise.title + ": ${TimeUtils.getTime(exercise.time.toLong()*1000)} "
+            tvExercFooterNextTitle.text = title
+        }
+
     }
 
     private fun startTimer(exercise: ExerciseModel) = with(binding) {
