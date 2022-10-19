@@ -15,6 +15,7 @@ import com.example.fitnessapp.utilites.FragmentManager
 import com.example.fitnessapp.utilites.TimeUtils
 
 const val COUNT_DOWN_TIME = 11000L
+
 class WaitingFragment : Fragment() {
 
     private lateinit var binding: FragmentWaitingBinding
@@ -37,21 +38,24 @@ class WaitingFragment : Fragment() {
     }
 
     private fun startTimer() = with(binding) {
-        timer = object :CountDownTimer(COUNT_DOWN_TIME, 1){
+        timer = object : CountDownTimer(COUNT_DOWN_TIME, 1) {
             override fun onTick(restTime: Long) {
                 tvTimer.text = TimeUtils.getTime(restTime)
                 pBarTimer.progress = restTime.toInt()
             }
 
             override fun onFinish() {
-               FragmentManager.setFragment(ExercisesFragment.newInstance(), activity as AppCompatActivity)
+                FragmentManager.setFragment(
+                    ExercisesFragment.newInstance(),
+                    activity as AppCompatActivity
+                )
             }
 
         }.start()
 
     }
 
-    override fun onDetach(){
+    override fun onDetach() {
         super.onDetach()
         timer.cancel()
     }

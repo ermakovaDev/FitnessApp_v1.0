@@ -20,7 +20,7 @@ class ExerciseAdapter() :
         fun setData(exercise: ExerciseModel) = with(binding) { // | binding.apply{}
             tvExerciseItemTitle.text = exercise.title
             tvExerciseItemTime.text = exercise.time
-            ivExerciseItemImage.setImageDrawable(GifDrawable(root.context.assets,exercise.image))
+            ivExerciseItemImage.setImageDrawable(GifDrawable(root.context.assets, exercise.image))
         }
 
     }
@@ -45,7 +45,6 @@ class ExerciseAdapter() :
         }
 
     }
-
 
 
 }
