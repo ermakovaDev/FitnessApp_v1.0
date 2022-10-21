@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,7 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
 
     private lateinit var binding: FragmentDaysBinding
     private val model: MainViewModel by activityViewModels()
+    private var actionBarMod : ActionBar? =null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +36,14 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initRecyclView()
     }
 
     private fun initRecyclView() = with(binding) {
         val adapter = DaysAdapter(this@DaysFragment) //add Fragment
+        actionBarMod = (activity as AppCompatActivity).supportActionBar
+        actionBarMod?.title = getString(R.string.day_list)
         rcViewBody.layoutManager = LinearLayoutManager(context as AppCompatActivity)
         rcViewBody.adapter = adapter
         adapter.submitList(fillDaysArray())

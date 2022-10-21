@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import com.example.fitnessapp.R
@@ -26,6 +27,7 @@ class ExercisesFragment : Fragment() {
     private var exercisesCounter = 0
     private var exercList: ArrayList<ExerciseModel>? = null
     private var timer: CountDownTimer? = null
+    private var actionBarMod : ActionBar? =null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +41,7 @@ class ExercisesFragment : Fragment() {
     @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        actionBarMod = (activity as AppCompatActivity).supportActionBar
         model.mutableListExercise.observe(viewLifecycleOwner) {
             exercList = it
             nextExercise()
@@ -66,6 +69,8 @@ class ExercisesFragment : Fragment() {
     private fun showExercise(exerciseModel: ExerciseModel) = with(binding) {
         ivExercHeaderImage.setImageDrawable(GifDrawable(root.context.assets, exerciseModel.image))
         tvExercBodyTitle.text = exerciseModel.title
+        val textTitleBar = "$exercisesCounter / ${exercList?.size}"
+        actionBarMod?.title = textTitleBar
     }
 
     private fun setExerciseType(exercise: ExerciseModel) {
