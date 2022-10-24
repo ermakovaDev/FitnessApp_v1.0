@@ -1,13 +1,14 @@
 package com.example.fitnessapp.fragments
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost // new menu
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitnessapp.R
@@ -22,7 +23,8 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
 
     private lateinit var binding: FragmentDaysBinding
     private val model: MainViewModel by activityViewModels()
-    private var actionBarMod : ActionBar? =null
+    private var actionBarMod: ActionBar? = null
+    private lateinit var adapter: DaysAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +37,35 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-model.currentDay = 0
+
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main_menu, menu)
+            }
+
+            @SuppressLint("CommitPrefEdits")
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId == R.id.reset) {
+                    model.pref?.edit()?.clear()?.apply()
+                    adapter.submitList(fillDaysArray())
+                }
+                return true
+            }
+
+        }, viewLifecycleOwner)
+        model.currentDay = 0
         initRecyclView()
     }
 
+    /*
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+*/
+
     private fun initRecyclView() = with(binding) {
-        val adapter = DaysAdapter(this@DaysFragment) //add Fragment
+        adapter = DaysAdapter(this@DaysFragment) //add Fragment
         actionBarMod = (activity as AppCompatActivity).supportActionBar
         actionBarMod?.title = getString(R.string.day_list)
         rcViewBody.layoutManager = LinearLayoutManager(context as AppCompatActivity)
@@ -62,12 +87,26 @@ model.currentDay = 0
 
     private fun fillDaysArray(): ArrayList<DayModel> {
         val tempArray = ArrayList<DayModel>() // initialisation instance of class
+        var daysDoneCounter = 0
         resources.getStringArray(R.array.day_position).forEach {
             model.currentDay++
             val exerciseCounter = it.split("_").size
-            tempArray.add(DayModel(it, 0,model.getExerciseCount() == exerciseCounter))
+            tempArray.add(DayModel(it, 0, model.getExerciseCount() == exerciseCounter))
         }
+        binding.progressBarHeader.max = tempArray.size
+        tempArray.forEach {
+            if (it.isDone) {
+                daysDoneCounter++
+            }
+        }
+        updateRestDaysUI(tempArray.size - daysDoneCounter, tempArray.size)
         return tempArray
+    }
+
+    private fun updateRestDaysUI(restDays: Int, days: Int) = with(binding) {
+        val rDays = getString(R.string.rest_days) + " $restDays"
+        tvProgressTextHeader.text = rDays
+        progressBarHeader.progress = days - restDays
     }
 
     override fun onClick(day: DayModel) {

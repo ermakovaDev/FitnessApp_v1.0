@@ -55,6 +55,7 @@
                 android:fontFamily="cursive"
                 android:text="@string/tag_line"
                 android:textColor="#880E4F"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/ivHeaderBG"
                 app:layout_constraintStart_toStartOf="@+id/ivHeaderBG"
                 app:layout_constraintTop_toTopOf="@+id/ivHeaderBG" />
@@ -83,6 +84,7 @@
                 android:fontFamily="cursive"
                 android:text="@string/hint_progress_bar"
                 android:textColor="#880E4F"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/progressBarHeader"
                 app:layout_constraintEnd_toEndOf="@+id/progressBarHeader"
                 app:layout_constraintStart_toStartOf="@+id/progressBarHeader" />
