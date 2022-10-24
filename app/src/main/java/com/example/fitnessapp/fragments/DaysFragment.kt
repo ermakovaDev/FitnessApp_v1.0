@@ -16,6 +16,7 @@ import com.example.fitnessapp.adapters.DayModel
 import com.example.fitnessapp.adapters.DaysAdapter
 import com.example.fitnessapp.adapters.ExerciseModel
 import com.example.fitnessapp.databinding.FragmentDaysBinding
+import com.example.fitnessapp.utilites.DialogManager
 import com.example.fitnessapp.utilites.FragmentManager
 import com.example.fitnessapp.utilites.MainViewModel
 
@@ -46,8 +47,15 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
             @SuppressLint("CommitPrefEdits")
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 if (menuItem.itemId == R.id.reset) {
-                    model.pref?.edit()?.clear()?.apply()
-                    adapter.submitList(fillDaysArray())
+                    DialogManager.showDialog(
+                        activity as AppCompatActivity,
+                        R.string.reset_all_days,
+                        object : DialogManager.Listener {
+                            override fun onClick() {
+                                model.pref?.edit()?.clear()?.apply()
+                                adapter.submitList(fillDaysArray())
+                            }
+                        })
                 }
                 return true
             }
@@ -110,12 +118,29 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
     }
 
     override fun onClick(day: DayModel) {
-        fillExerciseList(day)
-        model.currentDay = day.dayNumber
-        FragmentManager.setFragment(
-            ExercisesListFragment.newInstance(),
-            activity as AppCompatActivity
-        )
+        if (!day.isDone) {
+            fillExerciseList(day)
+            model.currentDay = day.dayNumber
+            FragmentManager.setFragment(
+                ExercisesListFragment.newInstance(),
+                activity as AppCompatActivity
+            )
+        } else {
+            DialogManager.showDialog(
+                activity as AppCompatActivity,
+                R.string.reset_one_day,
+                object : DialogManager.Listener {
+                    override fun onClick() {
+                        model.savePref(day.dayNumber.toString(), 0)
+                        fillExerciseList(day)
+                        model.currentDay = day.dayNumber
+                        FragmentManager.setFragment(
+                            ExercisesListFragment.newInstance(),
+                            activity as AppCompatActivity
+                        )
+                    }
+                })
+        }
     }
 
     companion object {
