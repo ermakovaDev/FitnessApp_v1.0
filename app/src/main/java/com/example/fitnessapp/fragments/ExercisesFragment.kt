@@ -122,6 +122,7 @@ class ExercisesFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
+        model.savePref(model.currentDay.toString(), exercisesCounter)
         timer?.cancel()
     }
 

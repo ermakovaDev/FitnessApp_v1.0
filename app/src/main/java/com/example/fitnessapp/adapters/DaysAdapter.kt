@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fitnessapp.R
 import com.example.fitnessapp.databinding.DaysListItemBinding
 
-class DaysAdapter(val listener: Listener) :
+class DaysAdapter(private val listener: Listener) :
     ListAdapter<DayModel, DaysAdapter.DayHolder>(MyComparator()) { // класс модели + класс разметки
 
     class DayHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -22,7 +22,7 @@ class DaysAdapter(val listener: Listener) :
                 root.context.getString(R.string.exercise) + " " + day.exercises.split("_").size.toString()
             tvCounter.text = exerciseCounterStr
             itemView.setOnClickListener {
-                listener.onClick(day)
+                listener.onClick(day.copy(dayNumber = adapterPosition+1))
             }
         }
 
