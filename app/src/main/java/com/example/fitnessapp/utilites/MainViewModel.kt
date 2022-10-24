@@ -14,8 +14,8 @@ class MainViewModel: ViewModel() { //MVVM
           pref?.edit()?.putInt(key, value)?.apply()
      }
 
-     fun getPref(key:String): Int{
-          return pref?.getInt(key, 0) ?: 0
+     fun getExerciseCount(): Int{
+          return pref?.getInt(currentDay.toString(), 0) ?: 0
      }
 
 }

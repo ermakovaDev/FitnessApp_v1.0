@@ -18,7 +18,6 @@ import com.example.fitnessapp.databinding.FragmentDaysBinding
 import com.example.fitnessapp.utilites.FragmentManager
 import com.example.fitnessapp.utilites.MainViewModel
 
-
 class DaysFragment : Fragment(), DaysAdapter.Listener {
 
     private lateinit var binding: FragmentDaysBinding
@@ -36,7 +35,7 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+model.currentDay = 0
         initRecyclView()
     }
 
@@ -55,7 +54,7 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
             val exerciseList = resources.getStringArray(R.array.exercise)
             val exercise = exerciseList[it.toInt()]
             val exerciseArray = exercise.split("|")
-            tempList.add(ExerciseModel(exerciseArray[0], exerciseArray[1], exerciseArray[2]))
+            tempList.add(ExerciseModel(exerciseArray[0], exerciseArray[1], exerciseArray[2], false))
         }
         model.mutableListExercise.value = tempList
     }
@@ -64,7 +63,9 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
     private fun fillDaysArray(): ArrayList<DayModel> {
         val tempArray = ArrayList<DayModel>() // initialisation instance of class
         resources.getStringArray(R.array.day_position).forEach {
-            tempArray.add(DayModel(it, false))
+            model.currentDay++
+            val exerciseCounter = it.split("_").size
+            tempArray.add(DayModel(it, 0,model.getExerciseCount() == exerciseCounter))
         }
         return tempArray
     }
@@ -76,10 +77,6 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
             ExercisesListFragment.newInstance(),
             activity as AppCompatActivity
         )
-    }
-
-    override fun onDetach() {
-        super.onDetach()
     }
 
     companion object {

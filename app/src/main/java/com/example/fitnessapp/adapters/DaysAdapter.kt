@@ -21,8 +21,9 @@ class DaysAdapter(private val listener: Listener) :
             val exerciseCounterStr =
                 root.context.getString(R.string.exercise) + " " + day.exercises.split("_").size.toString()
             tvCounter.text = exerciseCounterStr
+            checkBoxItem.isChecked = day.isDone
             itemView.setOnClickListener {
-                listener.onClick(day.copy(dayNumber = adapterPosition+1))
+                listener.onClick(day.copy(dayNumber = adapterPosition + 1))
             }
         }
 

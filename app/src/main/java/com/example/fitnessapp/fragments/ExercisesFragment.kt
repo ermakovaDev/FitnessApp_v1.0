@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
@@ -28,6 +27,7 @@ class ExercisesFragment : Fragment() {
     private var exercList: ArrayList<ExerciseModel>? = null
     private var timer: CountDownTimer? = null
     private var actionBarMod : ActionBar? =null
+    private var currentDay = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +41,8 @@ class ExercisesFragment : Fragment() {
     @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        currentDay = model.currentDay
+        exercisesCounter = model.getExerciseCount()
         actionBarMod = (activity as AppCompatActivity).supportActionBar
         model.mutableListExercise.observe(viewLifecycleOwner) {
             exercList = it
@@ -58,6 +60,7 @@ class ExercisesFragment : Fragment() {
             setExerciseType(exercis)
             showNextExercise()
         } else {
+            exercisesCounter++
             FragmentManager.setFragment(
                 DayFinishFragment.newInstance(),
                 activity as AppCompatActivity
@@ -122,7 +125,7 @@ class ExercisesFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        model.savePref(model.currentDay.toString(), exercisesCounter)
+        model.savePref(currentDay.toString(), exercisesCounter-1)
         timer?.cancel()
     }
 

@@ -21,6 +21,7 @@ class ExerciseAdapter() :
             tvExerciseItemTitle.text = exercise.title
             tvExerciseItemTime.text = exercise.time
             ivExerciseItemImage.setImageDrawable(GifDrawable(root.context.assets, exercise.image))
+            checkBoxExerciseItemCheck.isChecked = exercise.isDone
         }
 
     }
