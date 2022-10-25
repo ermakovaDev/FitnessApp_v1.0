@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B2DFDB"
+    android:background="@drawable/gradient_background"
     tools:context=".fragments.DaysFragment">
 
 
@@ -72,6 +72,7 @@
                 android:progress="50"
                 android:progressBackgroundTint="#E91E63"
                 android:progressTint="#880E4F"
+                android:scaleY="2.0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
