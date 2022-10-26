@@ -1,6 +1,7 @@
 package com.example.fitnessapp.fragments
 
 import android.annotation.SuppressLint
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -68,7 +69,6 @@ class ExercisesFragment : Fragment() {
         }
     }
 
-
     private fun showExercise(exerciseModel: ExerciseModel) = with(binding) {
         ivExercHeaderImage.setImageDrawable(GifDrawable(root.context.assets, exerciseModel.image))
         tvExercBodyTitle.text = exerciseModel.title
@@ -78,8 +78,11 @@ class ExercisesFragment : Fragment() {
 
     private fun setExerciseType(exercise: ExerciseModel) {
         if (exercise.time.startsWith("x")) {
+            timer?.cancel()
+            binding.pbarBodyTimer.visibility = View.INVISIBLE
             binding.tvExercBodyTimer.text = exercise.time
         } else {
+            binding.pbarBodyTimer.visibility = View.VISIBLE
             startTimer(exercise)
         }
     }
@@ -90,7 +93,7 @@ class ExercisesFragment : Fragment() {
             ivExercFooterImage.setImageDrawable(GifDrawable(root.context.assets, exercis.image))
             setTimeType(exercis)
         } else {
-            ivExercFooterImage.setImageDrawable(GifDrawable(root.context.assets, "finish.gif"))
+            ivExercFooterImage.setImageDrawable(GifDrawable(root.context.assets, "bb_finish.gif"))
             tvExercFooterNextTitle.text = getString(R.string.finish)
         }
     }

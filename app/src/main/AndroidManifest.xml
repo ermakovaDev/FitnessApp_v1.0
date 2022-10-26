@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/fitapp_f"
+        android:icon="@drawable/logo_header"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/fitapp_f"
+        android:roundIcon="@drawable/logo_header"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessApp"
         tools:targetApi="31">

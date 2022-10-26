@@ -31,7 +31,7 @@ class DayFinishFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         actionBarMod = (activity as AppCompatActivity).supportActionBar
-        actionBarMod?.title = getString(R.string.day_finish)
+        actionBarMod?.title = getString(R.string.day_finish_bar)
         binding.ivFinishImage.setImageDrawable(
             GifDrawable(
                 (activity as AppCompatActivity).assets,

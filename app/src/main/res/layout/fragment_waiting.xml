@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="@string/waiting_message"
+        android:text="@string/waiting_message_timer"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/tvTimer"
         app:layout_constraintEnd_toEndOf="@+id/tvTimer"
