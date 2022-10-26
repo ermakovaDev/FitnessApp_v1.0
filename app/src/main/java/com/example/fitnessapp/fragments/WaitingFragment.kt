@@ -16,7 +16,7 @@ import com.example.fitnessapp.databinding.FragmentWaitingBinding
 import com.example.fitnessapp.utilites.FragmentManager
 import com.example.fitnessapp.utilites.TimeUtils
 
-const val COUNT_DOWN_TIME = 11000L
+const val COUNT_DOWN_TIME = 3000L
 
 class WaitingFragment : Fragment() {
 

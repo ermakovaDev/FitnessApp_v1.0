@@ -1,7 +1,6 @@
 package com.example.fitnessapp.fragments
 
 import android.annotation.SuppressLint
-import android.opengl.Visibility
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -93,7 +92,8 @@ class ExercisesFragment : Fragment() {
             ivExercFooterImage.setImageDrawable(GifDrawable(root.context.assets, exercis.image))
             setTimeType(exercis)
         } else {
-            ivExercFooterImage.setImageDrawable(GifDrawable(root.context.assets, "bb_finish.gif"))
+            ivExercFooterImage.setImageResource(R.drawable.bg_header)
+           // ivExercFooterImage.setImageDrawable(GifDrawable(root.context.assets, "bb_finish.gif"))
             tvExercFooterNextTitle.text = getString(R.string.finish)
         }
     }
