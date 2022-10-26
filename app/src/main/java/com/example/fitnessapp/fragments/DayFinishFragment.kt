@@ -18,6 +18,7 @@ class DayFinishFragment : Fragment() {
     private lateinit var binding: FragmentDayFinishBinding
     private var actionBarMod : ActionBar? =null
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +35,7 @@ class DayFinishFragment : Fragment() {
         binding.ivFinishImage.setImageDrawable(
             GifDrawable(
                 (activity as AppCompatActivity).assets,
-                "finish.gif"
+                "bb_finish.gif"
             )
         )
         binding.btnFinishButton.setOnClickListener {

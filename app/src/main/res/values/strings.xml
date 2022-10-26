@@ -23,4 +23,5 @@
     <string name="warning">Внимание</string>
     <string name="reset_all_days">Хотите сбросить прогресс ВСЕХ ДНЕЙ тренировки?</string>
     <string name="reset_one_day">Хотите сбросить прогресс ЭТОГО ДНЯ тренировки и пройти все упражнения снова?</string>
+    <string name="logo">logo</string>
 </resources>

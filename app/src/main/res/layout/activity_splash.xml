@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".SplashActivity">
 
     <ImageView
         android:id="@+id/ivBG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="0.2"
         android:contentDescription="@string/todo"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,4 +20,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg"
         tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_header"
+        app:tint="@color/white" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
