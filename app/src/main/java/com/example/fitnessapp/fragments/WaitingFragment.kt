@@ -49,7 +49,7 @@ class WaitingFragment : Fragment() {
 
             override fun onFinish() {
                 FragmentManager.setFragment(
-                    ExercisesFragment.newInstance(),
+                    ExercisesVideoFragment.newInstance(),
                     activity as AppCompatActivity
                 )
             }
