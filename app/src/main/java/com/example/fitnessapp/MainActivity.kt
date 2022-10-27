@@ -2,8 +2,8 @@ package com.example.fitnessapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.MediaController
 import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
 import com.example.fitnessapp.databinding.ActivityMainBinding
 import com.example.fitnessapp.fragments.DaysFragment
 import com.example.fitnessapp.utilites.FragmentManager
