@@ -20,12 +20,13 @@
 
         <VideoView
             android:id="@+id/vvExercHeaderVideo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:contentDescription="headerVideo"
-            android:foreground="@drawable/bg"
-            android:foregroundGravity="top|center_vertical|center"
-            android:soundEffectsEnabled="true" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="4:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -34,6 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:layout_marginBottom="317dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnExercFooterNext"
         app:layout_constraintEnd_toEndOf="parent"

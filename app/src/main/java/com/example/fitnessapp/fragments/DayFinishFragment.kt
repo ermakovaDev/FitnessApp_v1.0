@@ -32,12 +32,13 @@ class DayFinishFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         actionBarMod = (activity as AppCompatActivity).supportActionBar
         actionBarMod?.title = getString(R.string.day_finish_bar)
-        binding.ivFinishImage.setImageDrawable(
+        binding.ivFinishImage.setImageResource(R.drawable.bg_header)
+       /* binding.ivFinishImage.setImageDrawable(
             GifDrawable(
                 (activity as AppCompatActivity).assets,
                 "bb_finish.gif"
             )
-        )
+        ) */
         binding.btnFinishButton.setOnClickListener {
             FragmentManager.setFragment(DaysFragment.newInstance(), activity as AppCompatActivity)
         }
