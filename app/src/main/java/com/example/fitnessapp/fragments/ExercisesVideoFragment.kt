@@ -41,8 +41,7 @@ class ExercisesVideoFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentExerciseVideoBinding.inflate(inflater, container, false)
-        videoView = binding.vvExercHeaderVideo
-        startIVideo()
+
         return binding.root
     }
 
@@ -52,6 +51,9 @@ class ExercisesVideoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        videoView = binding.vvExercHeaderVideo
+        startIVideo()
+        
         currentDay = model.currentDay
         exercisesCounter = model.getExerciseCount()
         actionBarMod = (activity as AppCompatActivity).supportActionBar
